@@ -14,3 +14,6 @@ is historical and at least three months old at publication.
 Each folder has its own notebook (committed with outputs), a `requirements.txt` and a README that says where the
 data comes from. Market data isn't redistributed here; each README explains how to download it, and every
 notebook runs without setup on a free fallback source.
+
+## License
+Code: MIT (see `LICENSE`). Market data is not included and stays under its providers' terms.
