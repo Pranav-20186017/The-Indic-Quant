@@ -1,0 +1,33 @@
+{
+ "n_days": 7623,
+ "sd_daily_pct": 1.42,
+ "skew": -0.32,
+ "excess_kurtosis": 9.4,
+ "beyond": {
+  "3": 116,
+  "4": 45,
+  "5": 18,
+  "6": 8
+ },
+ "kurt_trailing_month": 2.7,
+ "mixture": {
+  "w_calm": 0.818,
+  "sd_calm_pct": 0.92,
+  "sd_storm_pct": 2.69
+ },
+ "z_cond": {
+  "2020-03-23": -3.4,
+  "2004-05-17": -4.3,
+  "2009-05-18": 7.5,
+  "2024-06-04": -5.1
+ },
+ "aggregation_kurt": {
+  "daily": 9.4,
+  "weekly": 3.2,
+  "monthly": 2.4
+ },
+ "var_breaches": {
+  "0.99": 144,
+  "0.999": 58
+ }
+}

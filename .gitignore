@@ -1,0 +1,6 @@
+# Market data is not redistributed: each notebook explains where to download it
+*.csv
+__pycache__/
+.ipynb_checkpoints/
+.venv/
+.DS_Store
