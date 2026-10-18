@@ -57,8 +57,8 @@ def load_spx_closes(start="1950-01-01", end="2026-06-30") -> pd.Series:
     return s[start:end]
 
 
-def fit_two_bells(r: pd.Series, iters=500):
-    """Fit a zero-mean mixture of two normal curves with EM. Return (weight of the calm bell, σ calm, σ storm)."""
+def fit_two_normals(r: pd.Series, iters=500):
+    """Fit a zero-mean mixture of two normal distributions with EM. Return (weight of the calm part, σ calm, σ storm)."""
     x = (r - r.mean()).values
     w, s1, s2 = 0.7, x.std() * 0.6, x.std() * 1.8
     for _ in range(iters):

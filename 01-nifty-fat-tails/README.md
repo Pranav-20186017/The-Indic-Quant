@@ -7,11 +7,11 @@ read the results without running it.
 **Education only. This is not investment advice.**
 
 ## What the notebook shows
-- Nifty 50 daily returns, compared with a bell curve. Since 1995, 18 days are beyond 5σ. A bell curve expects 0.004.
-- The cause: volatility clusters. Big moves follow big moves. A blend of calm and stormy bell curves has fat tails.
+- Nifty 50 daily returns, compared with a normal distribution. Since 1995, 18 days are beyond 5σ. A normal distribution expects 0.004.
+- The cause: volatility clusters. Big moves follow big moves. A blend of a calm and a stormy normal distribution has fat tails.
 - After the volatility adjustment, some jumps remain. Two of them are election-result days.
 - Tails get thinner when days add up to months, but slowly. The tail exponent is near 3, as for the S&P 500.
-- The cost: a bell-curve 99.9% Value at Risk fails 7.6 times as often as it promises.
+- The cost: a normal 99.9% Value at Risk fails 7.6 times as often as it promises.
 
 ## Data
 - **Nifty 50:** official daily closes from NSE Indices, from 3 Nov 1995 (the index base date) to 30 Jun 2026.
