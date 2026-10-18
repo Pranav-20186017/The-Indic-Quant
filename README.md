@@ -1,19 +1,19 @@
-# The Indic Quant: code behind the videos
+# The Indic Quant: the code behind the videos
 
-Statistical analysis for **The Indic Quant** YouTube channel: quant finance, finance, economics and econometrics,
-with Indian market data first and the US as a comparison. Every number shown in a video comes from code in this
-repo, so you can check it, rerun it, or take it further.
+This repository holds the statistical analysis for the YouTube channel **The Indic Quant**. The channel covers
+quant finance, finance, economics and econometrics. It uses Indian market data first, and US data for comparison.
+Every number in a video comes from code in this repository. You can check the code, run it again, or extend it.
 
-**Education only, not investment advice.** Nothing here is a recommendation to buy or sell anything. The data used
-is historical and at least three months old at publication.
+**Education only. This is not investment advice.** Nothing here tells you to buy or sell anything. The data is
+historical, and it ends at least three months before each video is published.
 
 | # | Video | Folder |
 |---|---|---|
-| 01 | Fat tails in the Nifty 50 (link to follow) | [`01-nifty-fat-tails`](01-nifty-fat-tails/) |
+| 01 | Fat tails in the Nifty 50 (link after publication) | [`01-nifty-fat-tails`](01-nifty-fat-tails/) |
 
-Each folder has its own notebook (committed with outputs), a `requirements.txt` and a README that says where the
-data comes from. Market data isn't redistributed here; each README explains how to download it, and every
-notebook runs without setup on a free fallback source.
+Each folder has a notebook with its outputs, a `requirements.txt` file and a README. The README tells you where the
+data comes from. This repository does not include market data. Each README tells you how to download it. Each
+notebook also runs without setup, with a free data source.
 
 ## License
-Code: MIT (see `LICENSE`). Market data is not included and stays under its providers' terms.
+The code is under the MIT license (see `LICENSE`). Market data is not included, and its providers' terms apply to it.

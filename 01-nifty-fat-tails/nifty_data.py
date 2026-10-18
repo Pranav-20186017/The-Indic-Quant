@@ -1,17 +1,18 @@
 """Load daily index closes for the fat-tails notebook.
 
-Nifty 50, best first:
-  1. A CSV you download yourself from NSE Indices (niftyindices.com > Reports > Historical Data > NIFTY 50 >
-     download), saved next to this file as nifty50.csv. Covers 1990 onwards; the video uses 3 Nov 1995 onwards.
-  2. Any CSV path in the NIFTY_CSV environment variable (same columns: a date column and a close column).
-  3. Yahoo Finance (^NSEI) through yfinance. No setup, but it only starts in September 2007.
-S&P 500: SPX_CSV if set, else Yahoo Finance (^GSPC).
+Nifty 50: the loader uses the first source that is available.
+  1. nifty50.csv in this folder. Download it from NSE Indices: niftyindices.com > Reports > Historical Data >
+     NIFTY 50. The data starts in 1990. The video uses the data from 3 Nov 1995.
+  2. The CSV file in the NIFTY_CSV environment variable. The file must have a date column and a close column.
+  3. Yahoo Finance (^NSEI), through yfinance. This needs no setup, but the data starts in September 2007.
+S&P 500: the CSV file in SPX_CSV, if it is set. If not, Yahoo Finance (^GSPC).
 """
 import os
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
+from scipy import stats
 
 HERE = Path(__file__).parent
 
@@ -22,7 +23,7 @@ def _read_closes(path) -> pd.Series:
     date = next(cols[c] for c in cols if "date" in c)
     close = next(cols[c] for c in cols if c.startswith("close"))
     raw = df[date].astype(str).str.strip()
-    if raw.str.match(r"^\d{4}-\d{2}-\d{2}").all():   # ISO dates: never let day-first parsing swap day and month
+    if raw.str.match(r"^\d{4}-\d{2}-\d{2}").all():   # ISO dates: do not let day-first parsing swap day and month
         when = pd.to_datetime(raw, format="%Y-%m-%d")
     else:                                            # NSE downloads write dates like 03-Nov-1995 or 03 Nov 1995
         when = pd.to_datetime(raw, dayfirst=True, format="mixed")
@@ -31,7 +32,7 @@ def _read_closes(path) -> pd.Series:
 
 
 def _yahoo(ticker, start, end) -> pd.Series:
-    import yfinance as yf  # only needed for the fallback
+    import yfinance as yf  # the fallback source needs this package only
     df = yf.download(ticker, start=start, end=pd.Timestamp(end) + pd.Timedelta(days=1), auto_adjust=False, progress=False)
     s = df["Close"].squeeze().dropna()
     s.name = "close"
@@ -57,8 +58,7 @@ def load_spx_closes(start="1950-01-01", end="2026-06-30") -> pd.Series:
 
 
 def fit_two_bells(r: pd.Series, iters=500):
-    """Zero-mean mixture of two normals fitted by EM: returns (weight of calm bell, sd calm, sd storm)."""
-    from scipy import stats
+    """Fit a zero-mean mixture of two normal curves with EM. Return (weight of the calm bell, σ calm, σ storm)."""
     x = (r - r.mean()).values
     w, s1, s2 = 0.7, x.std() * 0.6, x.std() * 1.8
     for _ in range(iters):
